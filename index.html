@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OMG Pizza — El sabor que te hará decir OMG!</title>
+<meta name="description" content="OMG Pizza: más de 30 años de tradición pizzera, desde California hasta El Salvador. Pide y reserva por WhatsApp.">
+
+<!-- Open Graph -->
+<meta property="og:title" content="OMG Pizza">
+<meta property="og:description" content="El sabor que te hará decir OMG! Pide y reserva por WhatsApp.">
+<meta property="og:image" content="assets/logo.jpg">
+<meta property="og:type" content="website">
+
+<link rel="icon" href="assets/logo.jpg" type="image/jpeg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bungee&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- =========================================================
+     HEADER
+     ========================================================= -->
+<header class="site-header" id="siteHeader">
+  <div class="wrap">
+    <a href="#inicio" class="brand">
+      <img src="assets/logo.jpg" alt="Logotipo de OMG Pizza">
+      <span><em>OMG</em><i>!</i> Pizza</span>
+    </a>
+
+    <nav id="navLinks" class="nav-links">
+      <a href="#inicio">Inicio</a>
+      <a href="#historia">Historia</a>
+      <a href="#menu">Menú</a>
+      <a href="#arma-tu-pizza">Arma tu pizza</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+
+    <div class="nav-actions">
+      <a href="#contacto" class="btn btn--ghost btn--sm">Reservar</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="navLinks">
+        <svg id="navToggleIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- =========================================================
+     HERO
+     ========================================================= -->
+<section class="hero" id="inicio">
+  <div class="wrap">
+    <div class="hero-copy">
+      <span class="eyebrow">Desde 1989 · California a El Salvador</span>
+      <h1>El sabor que te hará decir <span class="accent">O</span><span class="accent2">M</span><span class="accent">G!</span></h1>
+      <p>Masa artesanal, ingredientes frescos y esa receta que llevamos perfeccionando por más de tres décadas, una pizza a la vez.</p>
+      <div class="hero-ctas">
+        <button class="btn btn--primary" id="btnHeroOrder">🍕 Pedir por WhatsApp</button>
+        <button class="btn btn--ghost" id="btnHeroReserve">📅 Reservar mesa</button>
+      </div>
+      <div class="hero-stats">
+        <div><strong>1989</strong><span>Desde que empezó todo</span></div>
+        <div><strong>5</strong><span>Nombres, una sola pasión</span></div>
+        <div><strong>2</strong><span>Países, un mismo sabor</span></div>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="hero-logo-plate">
+        <div class="ring" aria-hidden="true"></div>
+        <img src="assets/logo.jpg" alt="OMG Pizza">
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider-fire" aria-hidden="true"></div>
+
+<!-- =========================================================
+     HISTORIA
+     ========================================================= -->
+<section class="section" id="historia">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Nuestra historia</span>
+      <h2>Una receta que empezó en 1989</h2>
+      <p>De un local de dos-por-una en Canoga Park a las luces de Las Vegas, y ahora aquí, en El Salvador. Cada nombre en esta línea de tiempo fue un paso más cerca de la pizza que hoy sirves en tu mesa.</p>
+    </div>
+
+    <div class="timeline" id="timeline">
+      <div class="timeline-item" data-color="red">
+        <div class="timeline-dot">1989</div>
+        <div class="timeline-card">
+          <span class="loc">Canoga Park, California</span>
+          <h3><span class="year">Two For One Pizza</span></h3>
+          <p>Todo comenzó con una promoción imposible de rechazar y una masa que la gente no olvidaba.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item" data-color="gold">
+        <div class="timeline-dot">1995</div>
+        <div class="timeline-card">
+          <span class="loc">Granada Hills, California</span>
+          <h3><span class="year">Pizza Man</span></h3>
+          <p>El nombre cambió, la pasión no: un segundo local para seguir alimentando al vecindario.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item" data-color="green">
+        <div class="timeline-dot">1999</div>
+        <div class="timeline-card">
+          <span class="loc">North Hollywood, California</span>
+          <h3><span class="year">Famous Pizza</span></h3>
+          <p>La fama llegó de boca en boca: la fila afuera del local lo decía todo.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item" data-color="blue">
+        <div class="timeline-dot">2014</div>
+        <div class="timeline-card">
+          <span class="loc">Las Vegas, Nevada</span>
+          <h3><span class="year">Oh My God Pizza</span></h3>
+          <p>Bajo las luces de Las Vegas nació el nombre que se quedaría para siempre: OMG.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item" data-color="purple">
+        <div class="timeline-dot">2026</div>
+        <div class="timeline-card">
+          <span class="loc">El Salvador</span>
+          <h3><span class="year">OMG Pizza</span></h3>
+          <p>El sabor cruza fronteras. La historia sigue escribiéndose, ahora contigo.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     MENU
+     ========================================================= -->
+<section class="section section--alt" id="menu">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Nuestro menú</span>
+      <h2>Sabores que vamos sumando cada semana</h2>
+      <p>Estos son algunos de nuestros favoritos. El menú completo sigue creciendo — vuelve pronto por más.</p>
+    </div>
+
+    <div class="menu-grid" id="menuGrid">
+
+      <article class="menu-card">
+        <div class="menu-card-top">
+          <span class="menu-icon">🍕</span>
+          <span class="badge badge--fav">Más pedida</span>
+        </div>
+        <h3>OMG Especial</h3>
+        <p>Pepperoni, tocino crujiente, doble queso mozzarella y orilla rellena de queso.</p>
+        <div class="menu-card-foot">
+          <span class="size-tag">Personal · Mediana · Familiar</span>
+          <button class="btn btn--sm btn--gold" data-pizza="OMG Especial">Pedir</button>
+        </div>
+      </article>
+
+      <article class="menu-card">
+        <div class="menu-card-top">
+          <span class="menu-icon">🌶️</span>
+          <span class="badge badge--spicy">Picante</span>
+        </div>
+        <h3>Pepperoni Supreme</h3>
+        <p>Doble capa de pepperoni, orégano y un toque de chile en hojuelas.</p>
+        <div class="menu-card-foot">
+          <span class="size-tag">Personal · Mediana · Familiar</span>
+          <button class="btn btn--sm btn--gold" data-pizza="Pepperoni Supreme">Pedir</button>
+        </div>
+      </article>
+
+      <article class="menu-card">
+        <div class="menu-card-top">
+          <span class="menu-icon">🍗</span>
+          <span class="badge badge--new">Favorita</span>
+        </div>
+        <h3>BBQ Chicken</h3>
+        <p>Pollo a la parrilla, salsa BBQ, cebolla morada y un toque de cilantro fresco.</p>
+        <div class="menu-card-foot">
+          <span class="size-tag">Personal · Mediana · Familiar</span>
+          <button class="btn btn--sm btn--gold" data-pizza="BBQ Chicken">Pedir</button>
+        </div>
+      </article>
+
+      <article class="menu-card">
+        <div class="menu-card-top">
+          <span class="menu-icon">🧀</span>
+          <span class="badge badge--classic">Clásica</span>
+        </div>
+        <h3>Cuatro Quesos</h3>
+        <p>Mozzarella, parmesano, provolone y queso azul en cada rebanada.</p>
+        <div class="menu-card-foot">
+          <span class="size-tag">Personal · Mediana · Familiar</span>
+          <button class="btn btn--sm btn--gold" data-pizza="Cuatro Quesos">Pedir</button>
+        </div>
+      </article>
+
+      <article class="menu-card">
+        <div class="menu-card-top">
+          <span class="menu-icon">🍍</span>
+          <span class="badge badge--classic">Clásica</span>
+        </div>
+        <h3>Hawaiana</h3>
+        <p>Jamón, piña dulce y extra queso — el debate favorito de la mesa.</p>
+        <div class="menu-card-foot">
+          <span class="size-tag">Personal · Mediana · Familiar</span>
+          <button class="btn btn--sm btn--gold" data-pizza="Hawaiana">Pedir</button>
+        </div>
+      </article>
+
+      <article class="menu-card">
+        <div class="menu-card-top">
+          <span class="menu-icon">🍄</span>
+          <span class="badge badge--classic">Vegetariana</span>
+        </div>
+        <h3>Vegetariana</h3>
+        <p>Champiñones, pimientos, cebolla, aceitunas y tomate fresco.</p>
+        <div class="menu-card-foot">
+          <span class="size-tag">Personal · Mediana · Familiar</span>
+          <button class="btn btn--sm btn--gold" data-pizza="Vegetariana">Pedir</button>
+        </div>
+      </article>
+
+    </div>
+
+    <p class="menu-more">¿No ves tu favorita todavía? <strong>El menú sigue creciendo</strong> — escríbenos por WhatsApp y con gusto te contamos qué hay de nuevo.</p>
+  </div>
+</section>
+
+<!-- =========================================================
+     ARMA TU PIZZA (builder)
+     ========================================================= -->
+<section class="section" id="arma-tu-pizza">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Hazla a tu manera</span>
+      <h2>Arma tu propia OMG!</h2>
+      <p>Elige el tamaño, agrega tus ingredientes favoritos y mira cómo se arma tu pizza en tiempo real. Al final, tu pedido se envía directo por WhatsApp.</p>
+    </div>
+
+    <div class="builder">
+      <div class="pizza-stage">
+        <div class="pizza-plate">
+          <div class="pizza-base" id="pizzaBase"></div>
+        </div>
+      </div>
+
+      <div class="builder-panel">
+        <div class="builder-group">
+          <span class="label">1. Elige el tamaño</span>
+          <div class="size-options" id="sizeOptions">
+            <button class="chip is-active" data-size="Personal">Personal</button>
+            <button class="chip" data-size="Mediana">Mediana</button>
+            <button class="chip" data-size="Familiar">Familiar</button>
+          </div>
+        </div>
+
+        <div class="builder-group">
+          <span class="label">2. Elige tus ingredientes</span>
+          <div class="topping-grid" id="toppingGrid">
+            <button class="topping-chip" data-topping="Pepperoni" data-color="#d8241d"><span class="dot" style="background:#d8241d"></span>Pepperoni</button>
+            <button class="topping-chip" data-topping="Extra queso" data-color="#f5d76e"><span class="dot" style="background:#f5d76e"></span>Extra queso</button>
+            <button class="topping-chip" data-topping="Champiñones" data-color="#b98d5e"><span class="dot" style="background:#b98d5e"></span>Champiñones</button>
+            <button class="topping-chip" data-topping="Piña" data-color="#f5c518"><span class="dot" style="background:#f5c518"></span>Piña</button>
+            <button class="topping-chip" data-topping="Jalapeño" data-color="#3f8f3f"><span class="dot" style="background:#3f8f3f"></span>Jalapeño</button>
+            <button class="topping-chip" data-topping="Tocino" data-color="#8a3b26"><span class="dot" style="background:#8a3b26"></span>Tocino</button>
+            <button class="topping-chip" data-topping="Cebolla morada" data-color="#8a4b8a"><span class="dot" style="background:#8a4b8a"></span>Cebolla morada</button>
+            <button class="topping-chip" data-topping="Aceitunas" data-color="#2c2c2c"><span class="dot" style="background:#2c2c2c"></span>Aceitunas</button>
+            <button class="topping-chip" data-topping="Pimientos" data-color="#2f7d3a"><span class="dot" style="background:#2f7d3a"></span>Pimientos</button>
+            <button class="topping-chip" data-topping="Salchicha" data-color="#a5493a"><span class="dot" style="background:#a5493a"></span>Salchicha</button>
+            <button class="topping-chip" data-topping="Chile en hojuelas" data-color="#c22" ><span class="dot" style="background:#cc2222"></span>Chile en hojuelas</button>
+            <button class="topping-chip" data-topping="Choclo" data-color="#f0c419"><span class="dot" style="background:#f0c419"></span>Choclo</button>
+          </div>
+        </div>
+
+        <div class="builder-summary">
+          <span>Tamaño: <strong id="summarySize">Personal</strong> · Ingredientes: <strong id="summaryCount">0</strong></span>
+        </div>
+
+        <button class="btn btn--primary btn--full" id="btnBuilderOrder">🍕 Enviar mi pedido por WhatsApp</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider-fire" aria-hidden="true"></div>
+
+<!-- =========================================================
+     CONTACTO
+     ========================================================= -->
+<section class="section section--alt" id="contacto">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Visítanos</span>
+      <h2>Pide, reserva y disfruta</h2>
+      <p>Estamos a un mensaje de distancia. Elige lo que necesitas y te respondemos directo por WhatsApp.</p>
+    </div>
+
+    <div class="contact">
+      <div class="contact-card">
+        <div class="info-row">
+          <span class="ico">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 12-9 12s-9-5-9-12a9 9 0 0 1 18 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          </span>
+          <div>
+            <h4>Dirección</h4>
+            <!-- TODO: actualizar con la dirección real del local -->
+            <p>Dirección próximamente — el equipo la agregará aquí en cuanto abramos.</p>
+          </div>
+        </div>
+
+        <div class="info-row">
+          <span class="ico">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+          </span>
+          <div>
+            <h4>Horario</h4>
+            <!-- TODO: actualizar con el horario real -->
+            <p>Todos los días, 11:00 a.m. – 9:00 p.m.</p>
+          </div>
+        </div>
+
+        <div class="info-row">
+          <span class="ico">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.68 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.32 1.85.55 2.81.68A2 2 0 0 1 22 16.92Z"/></svg>
+          </span>
+          <div>
+            <h4>WhatsApp</h4>
+            <!-- TODO: el número se completa automáticamente desde script.js -->
+            <p id="phoneDisplay">Escríbenos y responderemos al instante.</p>
+          </div>
+        </div>
+
+        <div class="social-row">
+          <!-- TODO: reemplazar con los enlaces reales de cada red social -->
+          <a class="social-btn" href="https://facebook.com/omgpizza" target="_blank" rel="noopener" aria-label="Facebook de OMG Pizza">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.78-3.89 1.09 0 2.23.2 2.23.2v2.45h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0 0 22 12Z"/></svg>
+          </a>
+          <a class="social-btn" href="https://instagram.com/omgpizza" target="_blank" rel="noopener" aria-label="Instagram de OMG Pizza">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+          </a>
+          <a class="social-btn" href="https://tiktok.com/@omgpizza" target="_blank" rel="noopener" aria-label="TikTok de OMG Pizza">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.5 2h-3v13.6a3 3 0 1 1-2.5-2.96V9.5a6 6 0 1 0 5.5 5.98V8.8a7.6 7.6 0 0 0 4.5 1.45v-3.1A4.6 4.6 0 0 1 16.5 2Z"/></svg>
+          </a>
+          <a class="social-btn" href="#" id="socialWhatsapp" target="_blank" rel="noopener" aria-label="WhatsApp de OMG Pizza">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.79.47 3.47 1.29 4.93L2 22l5.31-1.39a9.87 9.87 0 0 0 4.73 1.2h.01c5.46 0 9.9-4.45 9.9-9.91C21.96 6.45 17.5 2 12.04 2Zm5.8 14.06c-.24.68-1.4 1.3-1.93 1.34-.5.05-1.02.24-3.4-.71-2.87-1.14-4.7-4.08-4.85-4.27-.14-.19-1.16-1.54-1.16-2.94 0-1.4.73-2.08.99-2.37.26-.28.57-.35.76-.35.19 0 .38 0 .55.01.18.01.42-.07.65.5.24.58.82 2 .89 2.15.07.14.11.31.02.5-.09.19-.14.31-.28.47-.14.16-.29.36-.42.48-.14.14-.28.29-.12.57.16.28.71 1.17 1.52 1.9 1.04.93 1.92 1.22 2.2 1.36.28.14.44.12.6-.07.16-.19.68-.79.86-1.06.18-.28.36-.23.61-.14.24.09 1.55.73 1.82.87.26.14.44.21.5.32.07.12.07.68-.16 1.34Z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="cta-card">
+        <span class="eyebrow">Directo por WhatsApp</span>
+        <h3>Todo el pedido, sin llamadas.</h3>
+        <p>Manda tu orden o reserva tu mesa en segundos. Nuestro equipo te confirma al instante.</p>
+        <div class="btn-stack">
+          <button class="btn btn--gold btn--full" id="btnContactOrder">🍕 Pedir por WhatsApp</button>
+          <button class="btn btn--ghost btn--full" id="btnContactReserve">📅 Reservar mesa por WhatsApp</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     FOOTER
+     ========================================================= -->
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="assets/logo.jpg" alt="OMG Pizza">
+        <div>
+          <strong>OMG! Pizza</strong>
+          <span>El sabor que te hará decir OMG! desde 1989.</span>
+        </div>
+      </div>
+      <div class="social-row">
+        <a class="social-btn" href="https://facebook.com/omgpizza" target="_blank" rel="noopener" aria-label="Facebook">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.78-3.89 1.09 0 2.23.2 2.23.2v2.45h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0 0 22 12Z"/></svg>
+        </a>
+        <a class="social-btn" href="https://instagram.com/omgpizza" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+        </a>
+        <a class="social-btn" href="https://tiktok.com/@omgpizza" target="_blank" rel="noopener" aria-label="TikTok">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.5 2h-3v13.6a3 3 0 1 1-2.5-2.96V9.5a6 6 0 1 0 5.5 5.98V8.8a7.6 7.6 0 0 0 4.5 1.45v-3.1A4.6 4.6 0 0 1 16.5 2Z"/></svg>
+        </a>
+        <a class="social-btn" href="#" id="footerWhatsapp" target="_blank" rel="noopener" aria-label="WhatsApp">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.79.47 3.47 1.29 4.93L2 22l5.31-1.39a9.87 9.87 0 0 0 4.73 1.2h.01c5.46 0 9.9-4.45 9.9-9.91C21.96 6.45 17.5 2 12.04 2Zm5.8 14.06c-.24.68-1.4 1.3-1.93 1.34-.5.05-1.02.24-3.4-.71-2.87-1.14-4.7-4.08-4.85-4.27-.14-.19-1.16-1.54-1.16-2.94 0-1.4.73-2.08.99-2.37.26-.28.57-.35.76-.35.19 0 .38 0 .55.01.18.01.42-.07.65.5.24.58.82 2 .89 2.15.07.14.11.31.02.5-.09.19-.14.31-.28.47-.14.16-.29.36-.42.48-.14.14-.28.29-.12.57.16.28.71 1.17 1.52 1.9 1.04.93 1.92 1.22 2.2 1.36.28.14.44.12.6-.07.16-.19.68-.79.86-1.06.18-.28.36-.23.61-.14.24.09 1.55.73 1.82.87.26.14.44.21.5.32.07.12.07.68-.16 1.34Z"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="year"></span> OMG Pizza. Todos los derechos reservados.</span>
+      <span>Hecho con 🍕 y mucho queso derretido.</span>
+    </div>
+  </div>
+</footer>
+
+<!-- WhatsApp floating button -->
+<a href="#" id="waFloat" class="wa-float" target="_blank" rel="noopener" aria-label="Pedir por WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.79.47 3.47 1.29 4.93L2 22l5.31-1.39a9.87 9.87 0 0 0 4.73 1.2h.01c5.46 0 9.9-4.45 9.9-9.91C21.96 6.45 17.5 2 12.04 2Zm5.8 14.06c-.24.68-1.4 1.3-1.93 1.34-.5.05-1.02.24-3.4-.71-2.87-1.14-4.7-4.08-4.85-4.27-.14-.19-1.16-1.54-1.16-2.94 0-1.4.73-2.08.99-2.37.26-.28.57-.35.76-.35.19 0 .38 0 .55.01.18.01.42-.07.65.5.24.58.82 2 .89 2.15.07.14.11.31.02.5-.09.19-.14.31-.28.47-.14.16-.29.36-.42.48-.14.14-.28.29-.12.57.16.28.71 1.17 1.52 1.9 1.04.93 1.92 1.22 2.2 1.36.28.14.44.12.6-.07.16-.19.68-.79.86-1.06.18-.28.36-.23.61-.14.24.09 1.55.73 1.82.87.26.14.44.21.5.32.07.12.07.68-.16 1.34Z"/></svg>
+</a>
+
+<div class="toast" id="toast"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
