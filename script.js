@@ -109,9 +109,12 @@ const DEFAULT_CATALOG = {
       const raw = localStorage.getItem(CATALOG_STORAGE_KEY);
       if (!raw) throw new Error("no catalog yet");
       const parsed = JSON.parse(raw);
-      // aseguramos que existan todas las categorías esperadas
+      // Saneamos cada categoría: debe ser un arreglo y cada producto un objeto
+      // válido con nombre. Cualquier entrada corrupta (ej. de una importación
+      // incompleta) se descarta en vez de romper el resto del sitio.
       Object.keys(CATEGORY_META).forEach((key) => {
-        if (!Array.isArray(parsed[key])) parsed[key] = [];
+        const list = Array.isArray(parsed[key]) ? parsed[key] : [];
+        parsed[key] = list.filter((p) => p && typeof p === "object" && typeof p.name === "string");
       });
       return parsed;
     } catch (e) {
@@ -293,15 +296,22 @@ const DEFAULT_CATALOG = {
       menuFilter.querySelectorAll(".filter-chip").forEach((c) => c.classList.remove("is-active"));
       chip.classList.add("is-active");
       activeFilter = chip.getAttribute("data-filter");
-      renderPublicMenu();
+      try { renderPublicMenu(); } catch (err) { console.error("Error al renderizar el menú:", err); }
     });
   });
 
-  renderPublicMenu();
+  try {
+    renderPublicMenu();
+  } catch (err) {
+    console.error("Error al renderizar el menú:", err);
+  }
 
   /* ---------------------------------------------------------
      Pizza Builder ("Arma tu pizza")
+     Aislado en su propia función: si algo más en la página falla,
+     esta sección igual se inicializa correctamente.
      --------------------------------------------------------- */
+  function initPizzaBuilder() {
   const sizeOptions = document.getElementById("sizeOptions");
   const toppingGrid = document.getElementById("toppingGrid");
   const pizzaBase = document.getElementById("pizzaBase");
@@ -310,6 +320,8 @@ const DEFAULT_CATALOG = {
   const receiptToppingsEl = document.getElementById("receiptToppings");
   const receiptTotalEl = document.getElementById("receiptTotal");
   const btnBuilderOrder = document.getElementById("btnBuilderOrder");
+
+  if (!sizeOptions || !toppingGrid || !pizzaBase || !btnBuilderOrder) return;
 
   const selectedToppings = new Map(); // id -> { topping, dots[] }
 
@@ -352,18 +364,22 @@ const DEFAULT_CATALOG = {
     return positions;
   }
 
-  // Coloca íconos reales del ingrediente sobre la imagen de la pizza
+  // Coloca íconos reales del ingrediente sobre la imagen de la pizza,
+  // con una pequeña caída y rotación aleatoria para que se vea como
+  // si el ingrediente se estuviera colocando de verdad.
   function addToppingVisual(topping) {
     const positions = seededPositions(topping.id, 5);
     return positions.map((pos, i) => {
       const dot = document.createElement("div");
       dot.className = "topping-dot";
       const size = 20 + (i % 3) * 4;
+      const rotation = Math.round(Math.random() * 40 - 20); // -20° a 20°
       dot.style.left = pos.x + "%";
       dot.style.top = pos.y + "%";
       dot.style.width = size + "px";
       dot.style.height = size + "px";
-      dot.style.animationDelay = i * 45 + "ms";
+      dot.style.setProperty("--rot", rotation + "deg");
+      dot.style.animationDelay = i * 60 + "ms";
       dot.innerHTML = `<img src="${topping.icon}" alt="">`;
       pizzaBase.appendChild(dot);
       return dot;
@@ -444,10 +460,18 @@ const DEFAULT_CATALOG = {
 
     openWhatsApp(message);
   });
+  } // fin de initPizzaBuilder
+
+  try {
+    initPizzaBuilder();
+  } catch (err) {
+    console.error("Error al inicializar 'Arma tu pizza':", err);
+  }
 
   /* ---------------------------------------------------------
      Hero flame particles
      --------------------------------------------------------- */
+  try {
   const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const heroVisual = document.querySelector(".hero-visual");
   if (heroVisual && !prefersReducedMotion) {
@@ -466,16 +490,26 @@ const DEFAULT_CATALOG = {
       heroVisual.appendChild(p);
     }
   }
+  } catch (err) {
+    console.error("Error en la animación de flamas:", err);
+  }
 
   /* ---------------------------------------------------------
      Footer year
      --------------------------------------------------------- */
-  const yearEl = document.getElementById("year");
-  if (yearEl) yearEl.textContent = new Date().getFullYear();
+  try {
+    const yearEl = document.getElementById("year");
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
+  } catch (err) {
+    console.error("Error al fijar el año del footer:", err);
+  }
 
   /* =========================================================
      PANEL DE ADMINISTRACIÓN
+     Aislado en su propia función por la misma razón que el
+     armador de pizza: un fallo aquí no debe afectar al resto.
      ========================================================= */
+  function initAdminPanel() {
   const adminTrigger = document.getElementById("adminTrigger");
   const loginOverlay = document.getElementById("loginOverlay");
   const loginForm = document.getElementById("loginForm");
@@ -495,6 +529,8 @@ const DEFAULT_CATALOG = {
   const btnAddToggle = document.getElementById("btnAddToggle");
   const adminAddForm = document.getElementById("adminAddForm");
   const btnCancelAdd = document.getElementById("btnCancelAdd");
+
+  if (!adminTrigger || !loginOverlay || !adminOverlay) return;
 
   let currentAdminCat = "pizzas";
 
@@ -683,7 +719,8 @@ const DEFAULT_CATALOG = {
       try {
         const parsed = JSON.parse(reader.result);
         Object.keys(CATEGORY_META).forEach((key) => {
-          if (!Array.isArray(parsed[key])) parsed[key] = [];
+          const list = Array.isArray(parsed[key]) ? parsed[key] : [];
+          parsed[key] = list.filter((p) => p && typeof p === "object" && typeof p.name === "string");
         });
         catalog = parsed;
         saveCatalog();
@@ -697,4 +734,11 @@ const DEFAULT_CATALOG = {
     reader.readAsText(file);
     fileImport.value = "";
   });
+  } // fin de initAdminPanel
+
+  try {
+    initAdminPanel();
+  } catch (err) {
+    console.error("Error al inicializar el panel de administración:", err);
+  }
 })();
