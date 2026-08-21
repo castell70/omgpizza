@@ -9,10 +9,10 @@
 <!-- Open Graph -->
 <meta property="og:title" content="OMG Pizza">
 <meta property="og:description" content="El sabor que te hará decir OMG! Pide y reserva por WhatsApp.">
-<meta property="og:image" content="assets/logo.png">
+<meta property="og:image" content="assets/images/logo.png">
 <meta property="og:type" content="website">
 
-<link rel="icon" href="assets/logo.png" type="image/png">
+<link rel="icon" href="assets/images/logo.png" type="image/png">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -28,7 +28,7 @@
 <header class="site-header" id="siteHeader">
   <div class="wrap">
     <a href="#inicio" class="brand">
-      <img src="assets/logo.png" alt="Logotipo de OMG Pizza">
+      <img src="assets/images/logo.png" alt="Logotipo de OMG Pizza">
       <span><em>OMG</em><i>!</i> Pizza</span>
     </a>
 
@@ -72,7 +72,7 @@
     <div class="hero-visual">
       <div class="hero-logo-plate">
         <div class="ring" aria-hidden="true"></div>
-        <img src="assets/logo.png" alt="OMG Pizza">
+        <img src="assets/images/logo.png" alt="OMG Pizza">
       </div>
     </div>
   </div>
@@ -190,32 +190,32 @@
         <div class="builder-group">
           <span class="label">1. Elige el tamaño</span>
           <div class="size-options" id="sizeOptions">
-            <button class="chip is-active" data-size="Personal">Personal</button>
-            <button class="chip" data-size="Mediana">Mediana</button>
-            <button class="chip" data-size="Familiar">Familiar</button>
+            <button class="chip is-active" data-size="Personal" data-price="5.00">Personal <span class="chip-price">$5.00</span></button>
+            <button class="chip" data-size="Mediana" data-price="7.50">Mediana <span class="chip-price">$7.50</span></button>
+            <button class="chip" data-size="Familiar" data-price="10.50">Familiar <span class="chip-price">$10.50</span></button>
           </div>
         </div>
 
         <div class="builder-group">
           <span class="label">2. Elige tus ingredientes</span>
           <div class="topping-grid" id="toppingGrid">
-            <button class="topping-chip" data-topping="Pepperoni" data-color="#d8241d"><span class="dot" style="background:#d8241d"></span>Pepperoni</button>
-            <button class="topping-chip" data-topping="Extra queso" data-color="#f5d76e"><span class="dot" style="background:#f5d76e"></span>Extra queso</button>
-            <button class="topping-chip" data-topping="Champiñones" data-color="#b98d5e"><span class="dot" style="background:#b98d5e"></span>Champiñones</button>
-            <button class="topping-chip" data-topping="Piña" data-color="#f5c518"><span class="dot" style="background:#f5c518"></span>Piña</button>
-            <button class="topping-chip" data-topping="Jalapeño" data-color="#3f8f3f"><span class="dot" style="background:#3f8f3f"></span>Jalapeño</button>
-            <button class="topping-chip" data-topping="Tocino" data-color="#8a3b26"><span class="dot" style="background:#8a3b26"></span>Tocino</button>
-            <button class="topping-chip" data-topping="Cebolla morada" data-color="#8a4b8a"><span class="dot" style="background:#8a4b8a"></span>Cebolla morada</button>
-            <button class="topping-chip" data-topping="Aceitunas" data-color="#2c2c2c"><span class="dot" style="background:#2c2c2c"></span>Aceitunas</button>
-            <button class="topping-chip" data-topping="Pimientos" data-color="#2f7d3a"><span class="dot" style="background:#2f7d3a"></span>Pimientos</button>
-            <button class="topping-chip" data-topping="Salchicha" data-color="#a5493a"><span class="dot" style="background:#a5493a"></span>Salchicha</button>
-            <button class="topping-chip" data-topping="Chile en hojuelas" data-color="#c22" ><span class="dot" style="background:#cc2222"></span>Chile en hojuelas</button>
-            <button class="topping-chip" data-topping="Choclo" data-color="#f0c419"><span class="dot" style="background:#f0c419"></span>Choclo</button>
+            <!-- Los botones de ingredientes se generan desde script.js (TOPPINGS),
+                 así el precio y el ícono siempre quedan sincronizados. -->
           </div>
         </div>
 
-        <div class="builder-summary">
-          <span>Tamaño: <strong id="summarySize">Personal</strong> · Ingredientes: <strong id="summaryCount">0</strong></span>
+        <div class="builder-receipt" id="builderReceipt">
+          <div class="receipt-row receipt-row--base">
+            <span>Pizza <strong id="receiptSize">Personal</strong></span>
+            <span id="receiptBasePrice">$0.00</span>
+          </div>
+          <ul class="receipt-toppings" id="receiptToppings">
+            <!-- ingredientes agregados, generados dinámicamente -->
+          </ul>
+          <div class="receipt-row receipt-row--total">
+            <span>Total</span>
+            <span id="receiptTotal">$0.00</span>
+          </div>
         </div>
 
         <button class="btn btn--primary btn--full" id="btnBuilderOrder">🍕 Enviar mi pedido por WhatsApp</button>
@@ -309,7 +309,7 @@
   <div class="wrap">
     <div class="footer-top">
       <div class="footer-brand">
-        <img src="assets/logo.png" alt="OMG Pizza">
+        <img src="assets/images/logo.png" alt="OMG Pizza">
         <div>
           <strong>OMG! Pizza</strong>
           <span>El sabor que te hará decir OMG! desde 1989.</span>

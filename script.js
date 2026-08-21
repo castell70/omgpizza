@@ -30,6 +30,28 @@ const SOCIAL_LINKS = {
 const ADMIN_USER = "OMG$2026";
 const ADMIN_PASS = "L@m3j0rP1zz@.2026";
 const ADMIN_SESSION_KEY = "omgAdminSession";
+/* =========================================================
+   CONFIGURACIÓN DE INGREDIENTES — "Arma tu pizza"
+   ---------------------------------------------------------
+   Los precios son de ejemplo: ajústalos a los reales del
+   negocio. Si agregas un ingrediente nuevo, súmalo aquí con
+   su ícono (colócalo en assets/images/toppings/) y su precio.
+   ========================================================= */
+const TOPPINGS = [
+  { id: "pepperoni", name: "Pepperoni", price: 0.75, icon: "assets/images/toppings/pepperoni.svg" },
+  { id: "queso", name: "Extra queso", price: 1.00, icon: "assets/images/toppings/queso.svg" },
+  { id: "champinon", name: "Champiñones", price: 0.75, icon: "assets/images/toppings/champinon.svg" },
+  { id: "pina", name: "Piña", price: 0.75, icon: "assets/images/toppings/pina.svg" },
+  { id: "jalapeno", name: "Jalapeño", price: 0.50, icon: "assets/images/toppings/jalapeno.svg" },
+  { id: "tocino", name: "Tocino", price: 1.00, icon: "assets/images/toppings/tocino.svg" },
+  { id: "cebolla", name: "Cebolla morada", price: 0.50, icon: "assets/images/toppings/cebolla.svg" },
+  { id: "aceituna", name: "Aceitunas", price: 0.50, icon: "assets/images/toppings/aceituna.svg" },
+  { id: "pimiento", name: "Pimientos", price: 0.50, icon: "assets/images/toppings/pimiento.svg" },
+  { id: "salchicha", name: "Salchicha", price: 1.00, icon: "assets/images/toppings/salchicha.svg" },
+  { id: "chile", name: "Chile en hojuelas", price: 0.25, icon: "assets/images/toppings/chile-hojuelas.svg" },
+  { id: "choclo", name: "Choclo", price: 0.50, icon: "assets/images/toppings/choclo.svg" }
+];
+
 const CATALOG_STORAGE_KEY = "omgPizzaCatalog_v1";
 
 /* Metadatos de categorías: orden, etiqueta e ícono por defecto */
@@ -283,12 +305,39 @@ const DEFAULT_CATALOG = {
   const sizeOptions = document.getElementById("sizeOptions");
   const toppingGrid = document.getElementById("toppingGrid");
   const pizzaBase = document.getElementById("pizzaBase");
-  const summarySize = document.getElementById("summarySize");
-  const summaryCount = document.getElementById("summaryCount");
+  const receiptSizeEl = document.getElementById("receiptSize");
+  const receiptBasePriceEl = document.getElementById("receiptBasePrice");
+  const receiptToppingsEl = document.getElementById("receiptToppings");
+  const receiptTotalEl = document.getElementById("receiptTotal");
   const btnBuilderOrder = document.getElementById("btnBuilderOrder");
 
-  let selectedSize = "Personal";
-  const selectedToppings = new Map();
+  const selectedToppings = new Map(); // id -> { topping, dots[] }
+
+  function formatMoney(n) {
+    return "$" + n.toFixed(2);
+  }
+
+  function activeSizeChip() {
+    return sizeOptions.querySelector(".chip.is-active");
+  }
+
+  // Genera el grid de ingredientes a partir de TOPPINGS (icono + nombre + precio)
+  function renderToppingGrid() {
+    toppingGrid.innerHTML = "";
+    TOPPINGS.forEach((topping) => {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "topping-chip";
+      btn.setAttribute("data-id", topping.id);
+      btn.innerHTML = `
+        <img src="${topping.icon}" alt="" aria-hidden="true">
+        <span class="t-name">${topping.name}</span>
+        <span class="t-price">+${formatMoney(topping.price)}</span>
+      `;
+      btn.addEventListener("click", () => toggleTopping(topping, btn));
+      toppingGrid.appendChild(btn);
+    });
+  }
 
   function seededPositions(seedStr, count) {
     let seed = 0;
@@ -297,68 +346,104 @@ const DEFAULT_CATALOG = {
     const positions = [];
     for (let i = 0; i < count; i++) {
       const angle = rand() * Math.PI * 2;
-      const radius = 12 + rand() * 34;
+      const radius = 10 + rand() * 32;
       positions.push({ x: 50 + Math.cos(angle) * radius, y: 50 + Math.sin(angle) * radius });
     }
     return positions;
   }
 
-  function addToppingVisual(topping, color) {
-    const positions = seededPositions(topping, 6);
+  // Coloca íconos reales del ingrediente sobre la imagen de la pizza
+  function addToppingVisual(topping) {
+    const positions = seededPositions(topping.id, 5);
     return positions.map((pos, i) => {
       const dot = document.createElement("div");
       dot.className = "topping-dot";
+      const size = 20 + (i % 3) * 4;
       dot.style.left = pos.x + "%";
       dot.style.top = pos.y + "%";
-      dot.style.width = dot.style.height = 9 + (i % 3) * 4 + "px";
-      dot.style.background = color;
-      dot.style.animationDelay = i * 40 + "ms";
+      dot.style.width = size + "px";
+      dot.style.height = size + "px";
+      dot.style.animationDelay = i * 45 + "ms";
+      dot.innerHTML = `<img src="${topping.icon}" alt="">`;
       pizzaBase.appendChild(dot);
       return dot;
     });
   }
   function removeToppingVisual(dots) { dots.forEach((dot) => dot.remove()); }
-  function updateSummary() {
-    summarySize.textContent = selectedSize;
-    summaryCount.textContent = String(selectedToppings.size);
+
+  function toggleTopping(topping, btn) {
+    if (selectedToppings.has(topping.id)) {
+      removeToppingVisual(selectedToppings.get(topping.id).dots);
+      selectedToppings.delete(topping.id);
+      btn.classList.remove("is-active");
+    } else {
+      const dots = addToppingVisual(topping);
+      selectedToppings.set(topping.id, { topping, dots });
+      btn.classList.add("is-active");
+    }
+    updateReceipt();
+  }
+
+  // Recalcula y dibuja el recibo: tamaño + ingredientes + total, en tiempo real
+  function updateReceipt() {
+    const sizeChip = activeSizeChip();
+    const sizeName = sizeChip.getAttribute("data-size");
+    const basePrice = parseFloat(sizeChip.getAttribute("data-price")) || 0;
+
+    receiptSizeEl.textContent = sizeName;
+    receiptBasePriceEl.textContent = formatMoney(basePrice);
+
+    receiptToppingsEl.innerHTML = "";
+    let toppingsTotal = 0;
+
+    if (selectedToppings.size === 0) {
+      const li = document.createElement("li");
+      li.className = "receipt-empty";
+      li.textContent = "Aún no agregas ingredientes extra.";
+      receiptToppingsEl.appendChild(li);
+    } else {
+      selectedToppings.forEach(({ topping }) => {
+        toppingsTotal += topping.price;
+        const li = document.createElement("li");
+        li.innerHTML = `<span><img src="${topping.icon}" alt="">${topping.name}</span><span>+${formatMoney(topping.price)}</span>`;
+        receiptToppingsEl.appendChild(li);
+      });
+    }
+
+    receiptTotalEl.textContent = formatMoney(basePrice + toppingsTotal);
   }
 
   sizeOptions.querySelectorAll(".chip").forEach((chip) => {
     chip.addEventListener("click", () => {
       sizeOptions.querySelectorAll(".chip").forEach((c) => c.classList.remove("is-active"));
       chip.classList.add("is-active");
-      selectedSize = chip.getAttribute("data-size");
-      updateSummary();
+      updateReceipt();
     });
   });
 
-  toppingGrid.querySelectorAll(".topping-chip").forEach((chip) => {
-    chip.addEventListener("click", () => {
-      const topping = chip.getAttribute("data-topping");
-      const color = chip.getAttribute("data-color") || "#f5b613";
-      if (selectedToppings.has(topping)) {
-        removeToppingVisual(selectedToppings.get(topping).dots);
-        selectedToppings.delete(topping);
-        chip.classList.remove("is-active");
-      } else {
-        const dots = addToppingVisual(topping, color);
-        selectedToppings.set(topping, { color, dots });
-        chip.classList.add("is-active");
-      }
-      updateSummary();
-    });
-  });
+  renderToppingGrid();
+  updateReceipt();
 
   btnBuilderOrder.addEventListener("click", () => {
-    const toppingsList = Array.from(selectedToppings.keys());
+    const sizeChip = activeSizeChip();
+    const sizeName = sizeChip.getAttribute("data-size");
+    const basePrice = parseFloat(sizeChip.getAttribute("data-price")) || 0;
+    const toppingsList = Array.from(selectedToppings.values()).map((entry) => entry.topping);
+    const toppingsTotal = toppingsList.reduce((sum, t) => sum + t.price, 0);
+    const total = basePrice + toppingsTotal;
+
     let message = `¡Hola OMG Pizza! 🍕 Quiero armar mi propia pizza:\n\n`;
-    message += `*Tamaño:* ${selectedSize}\n`;
-    message += toppingsList.length ? `*Ingredientes:* ${toppingsList.join(", ")}\n` : `*Ingredientes:* Sin ingredientes extra (solo queso y salsa)\n`;
-    message += `\n¡Gracias!`;
-    if (toppingsList.length === 0) showToast("Elige al menos un ingrediente para tu pizza 🍕");
+    message += `*Tamaño:* ${sizeName} (${formatMoney(basePrice)})\n`;
+    if (toppingsList.length) {
+      message += `*Ingredientes:*\n`;
+      toppingsList.forEach((t) => { message += `- ${t.name} (+${formatMoney(t.price)})\n`; });
+    } else {
+      message += `*Ingredientes:* Sin ingredientes extra (solo queso y salsa)\n`;
+    }
+    message += `\n*Total estimado:* ${formatMoney(total)}\n\n¡Gracias!`;
+
     openWhatsApp(message);
   });
-  updateSummary();
 
   /* ---------------------------------------------------------
      Hero flame particles
