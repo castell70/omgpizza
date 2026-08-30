@@ -78,6 +78,23 @@
   </div>
 </section>
 
+<!-- =========================================================
+     BIENVENIDA MULTILINGÜE (animada)
+     ========================================================= -->
+<section class="welcome-banner" aria-label="Mensaje de bienvenida">
+  <div class="wrap welcome-banner-inner">
+    <span class="welcome-icon" aria-hidden="true">🌎</span>
+    <div class="welcome-rotator" id="welcomeRotator">
+      <span class="welcome-line is-active" lang="es">Bienvenidos a El Salvador, los esperamos en Santa Ana Centro</span>
+      <span class="welcome-line" lang="en">Welcome to El Salvador — we're waiting for you in Santa Ana Centro</span>
+      <span class="welcome-line" lang="it">Benvenuti in El Salvador, vi aspettiamo a Santa Ana Centro</span>
+      <span class="welcome-line" lang="pt">Bem-vindos a El Salvador, esperamos por vocês em Santa Ana Centro</span>
+      <span class="welcome-line" lang="fr">Bienvenue au Salvador, nous vous attendons à Santa Ana Centro</span>
+    </div>
+    <span class="welcome-icon" aria-hidden="true">🍕</span>
+  </div>
+</section>
+
 <div class="divider-fire" aria-hidden="true"></div>
 
 <!-- =========================================================
@@ -197,7 +214,10 @@
         </div>
 
         <div class="builder-group">
-          <span class="label">2. Elige tus ingredientes</span>
+          <div class="ingredients-head">
+            <span class="label">2. Elige tus ingredientes</span>
+          </div>
+
           <div class="topping-grid" id="toppingGrid">
             <!-- Los botones de ingredientes se generan desde script.js (TOPPINGS),
                  así el precio y el ícono siempre quedan sincronizados. -->

@@ -154,7 +154,7 @@ p{ margin:0 0 16px; color:var(--cream-dim); }
   gap:20px;
 }
 .brand{ display:flex; align-items:center; gap:10px; }
-.brand img{ height:44px; width:44px; object-fit:contain; border-radius:10px; }
+.brand img{ height:44px; width:44px; object-fit:cover; border-radius:50%; }
 .brand span{
   font-family:var(--font-display);
   font-size:1.05rem;
@@ -286,7 +286,7 @@ p{ margin:0 0 16px; color:var(--cream-dim); }
   display:flex; align-items:center; justify-content:center;
   animation:float 6s ease-in-out infinite;
 }
-.hero-logo-plate img{ width:78%; }
+.hero-logo-plate img{ width:92%; height:92%; object-fit:cover; border-radius:50%; }
 .hero-logo-plate .ring{
   position:absolute; inset:-14px;
   border-radius:50%;
@@ -456,13 +456,13 @@ p{ margin:0 0 16px; color:var(--cream-dim); }
 .menu-more strong{ color:var(--gold); }
 
 /* =========================================================
-   Builder (signature interactive)
+   Builder (signature interactive) — CORREGIDO
    ========================================================= */
 .builder{
   display:grid;
   grid-template-columns:.95fr 1.05fr;
   gap:56px;
-  align-items:center;
+  align-items:start;
 }
 @media (max-width:900px){
   .builder{ grid-template-columns:1fr; }
@@ -470,33 +470,51 @@ p{ margin:0 0 16px; color:var(--cream-dim); }
 
 .pizza-stage{
   position:relative;
+  width:100%;
   aspect-ratio:1;
   max-width:440px;
   margin:0 auto;
-  display:flex; align-items:center; justify-content:center;
+  display:flex;
+  align-items:center;
+  justify-content:center;
 }
 .pizza-plate{
-  position:absolute; inset:0;
+  position:absolute;
+  inset:0;
   border-radius:50%;
-  background:radial-gradient(circle, #2b2621, #171310 75%);
-  box-shadow:var(--shadow-deep), inset 0 0 0 10px rgba(255,255,255,.03);
+  background:radial-gradient(circle at 40% 35%, #2b2621, #0f0d0b 80%);
+  box-shadow:var(--shadow-deep), inset 0 0 0 8px rgba(255,255,255,.04), inset 0 0 0 12px rgba(0,0,0,.3);
 }
 .pizza-base{
   position:relative;
-  width:82%; height:82%;
+  width:80%;
+  height:80%;
   border-radius:50%;
   background:
-    radial-gradient(circle at 50% 50%, #f2c14e 0%, #e3a92c 55%, #c98a1c 100%);
-  box-shadow:0 0 0 14px #d99a2e, 0 0 0 18px #b5751b, 0 20px 40px rgba(0,0,0,.5);
+    radial-gradient(circle at 50% 50%, #f5c85a 0%, #e3a92c 50%, #c98a1c 85%, #b07515 100%);
+  box-shadow:0 0 0 12px #d99a2e, 0 0 0 16px #b5751b, 0 20px 40px rgba(0,0,0,.5);
   overflow:hidden;
+  margin:auto;
 }
 .pizza-base::before{
   content:"";
-  position:absolute; inset:0;
+  position:absolute;
+  inset:0;
   background:
-    radial-gradient(circle at 30% 30%, rgba(216,36,29,.18), transparent 55%),
-    radial-gradient(circle at 65% 70%, rgba(216,36,29,.15), transparent 55%);
+    radial-gradient(circle at 30% 28%, rgba(216,36,29,.25), transparent 50%),
+    radial-gradient(circle at 70% 65%, rgba(216,36,29,.18), transparent 55%),
+    radial-gradient(circle at 50% 50%, rgba(255,200,50,.15), transparent 70%);
 }
+.pizza-base::after{
+  content:"";
+  position:absolute;
+  inset:8%;
+  border-radius:50%;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(255,200,80,.3), transparent 60%);
+  pointer-events:none;
+}
+
 .topping-dot{
   position:absolute;
   transform:translate(-50%,-50%);
@@ -522,7 +540,7 @@ p{ margin:0 0 16px; color:var(--cream-dim); }
 
 .builder-panel h3{ margin-bottom:6px; }
 .builder-group{ margin-bottom:28px; }
-.builder-group > .label{
+.builder-group .label{
   font-family:var(--font-display);
   font-size:.75rem;
   letter-spacing:.06em;
@@ -530,6 +548,17 @@ p{ margin:0 0 16px; color:var(--cream-dim); }
   display:block;
   margin-bottom:14px;
 }
+
+/* Encabezado de "Elige tus ingredientes" */
+.ingredients-head{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:16px;
+  flex-wrap:wrap;
+}
+.ingredients-head .label{ margin-bottom:0; padding-top:6px; }
+
 .size-options{ display:flex; gap:10px; flex-wrap:wrap; }
 .chip{
   display:flex;
@@ -565,20 +594,36 @@ p{ margin:0 0 16px; color:var(--cream-dim); }
 }
 .topping-chip{
   display:flex;
+  flex-direction:column;
   align-items:center;
-  gap:10px;
+  gap:2px;
   border:2px solid rgba(246,239,224,.15);
   background:var(--bg-panel-2);
   color:var(--cream);
-  padding:9px 12px;
+  padding:10px 8px;
   border-radius:12px;
   font-size:.82rem;
   font-weight:600;
-  text-align:left;
+  text-align:center;
   transition:all .18s ease;
+  min-height:76px;
+  font-family:var(--font-body);
 }
-.topping-chip img{ width:24px; height:24px; flex:none; border-radius:50%; background:rgba(255,255,255,.06); }
-.topping-chip .t-name{ flex:1; line-height:1.2; }
+.topping-chip img{ 
+  width:28px; 
+  height:28px; 
+  flex:none; 
+  border-radius:50%; 
+  background:rgba(255,255,255,.06);
+  margin-bottom:0px;
+}
+.topping-chip .t-name{ 
+  flex:1; 
+  line-height:1.2;
+  font-size:.82rem;
+  font-weight:600;
+  color:var(--cream);
+}
 .topping-chip .t-price{
   font-family:var(--font-display);
   font-size:.68rem;
@@ -586,6 +631,7 @@ p{ margin:0 0 16px; color:var(--cream-dim); }
   white-space:nowrap;
 }
 .topping-chip.is-active .t-price{ color:#1a1200; }
+.topping-chip.is-active .t-name{ color:#1a1200; }
 .topping-chip:hover{ border-color:rgba(245,182,19,.5); }
 .topping-chip.is-active{
   border-color:var(--gold);
@@ -722,7 +768,7 @@ p{ margin:0 0 16px; color:var(--cream-dim); }
   border-bottom:1px solid rgba(246,239,224,.08);
 }
 .footer-brand{ display:flex; align-items:center; gap:12px; }
-.footer-brand img{ height:46px; width:46px; border-radius:10px; }
+.footer-brand img{ height:46px; width:46px; object-fit:cover; border-radius:50%; }
 .footer-brand strong{ font-family:var(--font-display); font-size:1rem; display:block; }
 .footer-brand span{ font-size:.8rem; color:var(--cream-dim); }
 .footer-bottom{
@@ -780,6 +826,63 @@ p{ margin:0 0 16px; color:var(--cream-dim); }
   height:10px;
   background:repeating-linear-gradient(45deg, var(--red) 0 10px, var(--gold) 10px 20px);
   opacity:.85;
+}
+
+/* =========================================================
+   Welcome banner — animated multilingual message
+   ========================================================= */
+.welcome-banner{
+  position:relative;
+  padding:16px 0;
+  background:linear-gradient(90deg, var(--green) 0%, #efece2 50%, var(--red) 100%);
+  overflow:hidden;
+}
+.welcome-banner-inner{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:16px;
+}
+.welcome-icon{
+  flex:none;
+  font-size:1.4rem;
+  filter:drop-shadow(0 2px 3px rgba(0,0,0,.35));
+}
+.welcome-rotator{
+  position:relative;
+  flex:1;
+  max-width:680px;
+  font-size:clamp(.82rem,1.9vw,1.05rem);
+  line-height:1.4;
+  height:calc(1.4em * 2); /* reserva espacio fijo para dos líneas de texto */
+  overflow:hidden;
+}
+.welcome-line{
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  font-family:var(--font-display);
+  font-size:inherit;
+  line-height:inherit;
+  letter-spacing:.01em;
+  color:#161208;
+  text-shadow:0 1px 0 rgba(255,255,255,.25);
+  opacity:0;
+  transform:translateY(14px);
+  transition:opacity .5s ease, transform .5s ease;
+  padding:0 8px;
+}
+.welcome-line.is-active{
+  opacity:1;
+  transform:translateY(0);
+}
+
+@media (max-width:640px){
+  .welcome-icon{ display:none; }
+  .welcome-rotator{ font-size:.8rem; line-height:1.35; }
 }
 
 @media (max-width:520px){
