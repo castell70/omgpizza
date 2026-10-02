@@ -219,6 +219,7 @@
     const money = (n) => "$" + n.toFixed(2);
     const activeSize = () => sizeOptions.querySelector(".chip.is-active");
 
+    /* Renderiza los botones de ingredientes */
     function renderGrid() {
       toppingGrid.innerHTML = "";
       TOPPINGS.forEach((t) => {
@@ -227,13 +228,126 @@
         btn.className = "topping-chip";
         btn.setAttribute("data-id", t.id);
         btn.innerHTML = `
-          <img src="${t.icon}" alt="" aria-hidden="true">
+          <img src="${t.icon}" alt="" aria-hidden="true" onerror="this.style.display='none'">
           <span class="t-name">${t.name}</span>
           <span class="t-price">+${money(t.price)}</span>`;
         btn.addEventListener("click", () => toggle(t, btn));
         toppingGrid.appendChild(btn);
       });
     }
+
+    /* Genera posiciones dentro del círculo de queso (radio seguro 10-38%) */
+    function seededPositions(seedStr, count) {
+      let seed = 0;
+      for (let i = 0; i < seedStr.length; i++) {
+        seed = (seed * 31 + seedStr.charCodeAt(i)) % 100000;
+      }
+      const rand = () => {
+        seed = (seed * 9301 + 49297) % 233280;
+        return seed / 233280;
+      };
+      const out = [];
+      for (let i = 0; i < count; i++) {
+        const angle  = rand() * Math.PI * 2;
+        const radius = 8 + rand() * 30;           // 8% a 38% del radio
+        out.push({
+          x: 50 + Math.cos(angle) * radius,
+          y: 50 + Math.sin(angle) * radius
+        });
+      }
+      return out;
+    }
+
+    /* Coloca varias copias del ingrediente sobre el queso */
+    function addVisual(t) {
+      const count = 5;
+      const baseSize = t.id === "queso" || t.id === "choclo" ? 24 : 28;
+      return seededPositions(t.id, count).map((pos, i) => {
+        const dot = document.createElement("div");
+        dot.className = "topping-dot";
+        const s = baseSize + (i % 3) * 4;
+        dot.style.left = pos.x + "%";
+        dot.style.top  = pos.y + "%";
+        dot.style.width  = s + "px";
+        dot.style.height = s + "px";
+        dot.style.setProperty("--rot", Math.round(Math.random() * 50 - 25) + "deg");
+        dot.style.animationDelay = i * 70 + "ms";
+        dot.innerHTML = `<img src="${t.icon}" alt="">`;
+        pizzaBase.appendChild(dot);
+        return dot;
+      });
+    }
+
+    const removeVisual = (dots) => dots.forEach((d) => d.remove());
+
+    function toggle(t, btn) {
+      if (selected.has(t.id)) {
+        removeVisual(selected.get(t.id).dots);
+        selected.delete(t.id);
+        btn.classList.remove("is-active");
+      } else {
+        selected.set(t.id, { topping: t, dots: addVisual(t) });
+        btn.classList.add("is-active");
+      }
+      updateReceipt();
+    }
+
+    function updateReceipt() {
+      const chip = activeSize();
+      const sizeName = chip.getAttribute("data-size");
+      const basePrice = parseFloat(chip.getAttribute("data-price")) || 0;
+      receiptSizeEl.textContent = sizeName;
+      receiptBaseEl.textContent = money(basePrice);
+
+      receiptTopEl.innerHTML = "";
+      let topTotal = 0;
+      if (selected.size === 0) {
+        const li = document.createElement("li");
+        li.className = "receipt-empty";
+        li.textContent = "Aún no agregas ingredientes extra.";
+        receiptTopEl.appendChild(li);
+      } else {
+        selected.forEach(({ topping }) => {
+          topTotal += topping.price;
+          const li = document.createElement("li");
+          li.innerHTML = `<span><img src="${topping.icon}" alt="">${topping.name}</span><span>+${money(topping.price)}</span>`;
+          receiptTopEl.appendChild(li);
+        });
+      }
+      receiptTotEl.textContent = money(basePrice + topTotal);
+    }
+
+    sizeOptions.querySelectorAll(".chip").forEach((chip) =>
+      chip.addEventListener("click", () => {
+        sizeOptions.querySelectorAll(".chip").forEach((c) => c.classList.remove("is-active"));
+        chip.classList.add("is-active");
+        updateReceipt();
+      })
+    );
+
+    renderGrid();
+    updateReceipt();
+
+    btnOrder.addEventListener("click", () => {
+      const chip = activeSize();
+      const sizeName = chip.getAttribute("data-size");
+      const basePrice = parseFloat(chip.getAttribute("data-price")) || 0;
+      const list = Array.from(selected.values()).map((e) => e.topping);
+      const topTotal = list.reduce((s, t) => s + t.price, 0);
+      const total = basePrice + topTotal;
+
+      let msg = `¡Hola OMG Pizza! 🍕 Quiero armar mi propia pizza:\n\n`;
+      msg += `*Tamaño:* ${sizeName} (${money(basePrice)})\n`;
+      if (list.length) {
+        msg += `*Ingredientes:*\n`;
+        list.forEach((t) => { msg += `- ${t.name} (+${money(t.price)})\n`; });
+      } else {
+        msg += `*Ingredientes:* Sin ingredientes extra (solo queso y salsa)\n`;
+      }
+      msg += `\n*Total estimado:* ${money(total)}\n\n¡Gracias!`;
+      openWhatsApp(msg);
+    });
+  }
 
     function seededPositions(seedStr, count) {
       let seed = 0;
