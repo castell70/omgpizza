@@ -2,9 +2,9 @@
 window.OMG_CONFIG = {
   whatsappNumber: "50300000000",       // TODO: reemplazar con el número real
   social: {
-    facebook:  "https://facebook.com/omgpizza",
-    instagram: "https://instagram.com/omgpizza",
-    tiktok:    "https://tiktok.com/@omgpizza"
+    facebook:  "https://www.facebook.com/p/OMG-PIZZA-100066587932656/?locale=es_LA",
+    instagram: "https://instagram.com/omgpizzasv",
+  /*  tiktok:    "https://tiktok.com/@omgpizza" */
   },
   admin: {
     user: "OMG$2026",
