@@ -4,7 +4,7 @@ window.OMG_CONFIG = {
   social: {
     facebook:  "https://www.facebook.com/p/OMG-PIZZA-100066587932656/?locale=es_LA",
     instagram: "https://instagram.com/omgpizzasv",
-  /*  tiktok:    "https://tiktok.com/@omgpizza" */
+    tiktok:    "https://www.tiktok.com/@omgpizzasantein"
   },
   admin: {
     user: "OMG$2026",
