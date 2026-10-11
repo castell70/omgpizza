@@ -1,6 +1,6 @@
 /* OMG PIZZA — config.js — Configuración global del sitio */
 window.OMG_CONFIG = {
-  whatsappNumber: "50300000000",       // TODO: reemplazar con el número real
+  whatsappNumber: "50364416739",       // TODO: reemplazar con el número real
   social: {
     facebook:  "https://www.facebook.com/p/OMG-PIZZA-100066587932656/?locale=es_LA",
     instagram: "https://instagram.com/omgpizzasv",
