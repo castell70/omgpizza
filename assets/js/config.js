@@ -13,7 +13,7 @@ window.OMG_CONFIG = {
   },
   catalogKey: "omgPizzaCatalog_v2",
   messages: {
-    order:   "¡Hola OMG Pizza! 🍕 Quiero hacer un pedido.",
-    reserve: "¡Hola OMG Pizza! 📅 Quiero reservar una mesa."
+    order:   "¡Hola OMG Pizza! Quiero hacer un pedido.",
+    reserve: "¡Hola OMG Pizza! Quiero reservar una mesa."
   }
 };
